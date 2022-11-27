@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Stay hungry, stay foolish.">
+    <meta name="author" content="naihe,239144498@qq.com">
+    
+    <title>
+        
+            开源IPTV源服务程序使用教程 |
+        
+        Naihe&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"naihe.me","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Stay hungry, stay foolish."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Naihe's Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Naihe&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/%20%7C%7C%20Home"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives%20%7C%7C%20archive"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories%20%7C%7C%20th"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags%20%7C%7C%20tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links%20%7C%7C%20link"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about%20%7C%7C%20user"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/sitemap.xml%20%7C%7C%20sitemap"
+                            >
+                                SITEMAP
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/%20%7C%7C%20Home">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives%20%7C%7C%20archive">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories%20%7C%7C%20th">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags%20%7C%7C%20tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links%20%7C%7C%20link">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about%20%7C%7C%20user">关于</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/sitemap.xml%20%7C%7C%20sitemap">SITEMAP</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">开源IPTV源服务程序使用教程</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">naihe,239144498@qq.com</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-09-10 21:46:25</span>
+        <span class="mobile">2022-09-10 21:46</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/python/">python</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/iptv/">iptv</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/python/">python</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/fastapi/">fastapi</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>13 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="Streaming-Media-Server-Pro"><a href="#Streaming-Media-Server-Pro" class="headerlink" title="Streaming-Media-Server-Pro"></a><strong><a class="link"   target="_blank" rel="noopener" href="https://github.com/239144498/Streaming-Media-Server-Pro" >Streaming-Media-Server-Pro<i class="fas fa-external-link-alt"></i></a></strong></h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&amp;emsp;&amp;emsp;我的目标是将程序打造成属于每个人的直播源服务，且对每个人完全开源免费！可作为家庭影院电视、视频等流媒体的提供商，兼容全平台，只需使用视频播放器调用接口链接即可享用，不多说开始喽。</p>
+<h3 id="开源程序介绍点击跳转"><a href="#开源程序介绍点击跳转" class="headerlink" title="开源程序介绍点击跳转"></a><a class="link"   target="_blank" rel="noopener" href="https://github.com/239144498/Streaming-Media-Server-Pro" >开源程序介绍点击跳转<i class="fas fa-external-link-alt"></i></a></h3><h1 id="部署教程-by-Naihe"><a href="#部署教程-by-Naihe" class="headerlink" title="部署教程 by Naihe"></a>部署教程 by Naihe</h1><p>一键部署教程：<a class="link"   target="_blank" rel="noopener" href="https://www.right.com.cn/forum/forum.php?mod=viewthread&amp;tid=8252305" >https://www.right.com.cn/forum/forum.php?mod=viewthread&amp;tid=8252305<i class="fas fa-external-link-alt"></i></a><br>详细部署教程：<a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/1314h/p/16651157.html" >https://www.cnblogs.com/1314h/p/16651157.html<i class="fas fa-external-link-alt"></i></a><br>免费公益接口：<a class="link"   target="_blank" rel="noopener" href="https://stream.naihe.cf/docs" >https://stream.naihe.cf/docs<i class="fas fa-external-link-alt"></i></a></p>
+<p><em>请不要对接口进行路径扫描，访问&#x2F;docs接口文档查看所有可用路径</em></p>
+<p>该教程是我呕心沥血写成，使用教程包括程序部署和每个接口使用说明等，尽量保证每个人都会使用，部署总结概括需要做到以下及几点：</p>
+<ol>
+<li>安装python或者docker（二选一必装）</li>
+<li>安装PostgreSql或者MySQL数据库（二选一推荐安装）</li>
+<li>安装Redis数据库（可选安装）</li>
+<li>一定的耐心（看完下面详细的教程）</li>
+</ol>
+<p><em>先说明我的配置</em></p>
+<p><em>服务器1：1G内存+10G存储，mysql数据库，redis数据库</em></p>
+<p><em>分布式下载5台</em></p>
+<p>   <em>下载 ts + 上传数据库 ~ 1s时间</em></p>
+<p><strong>最近在256M内存VPS部署该程序，经测试也可以正常运行</strong></p>
+<p>以上仅供参考，程序对配置要求不高，实际使用1台服务器即可使程序正常运行。</p>
+<p>服务器位置最好在香港、日本等物理距离近的地方，尽量不要选择国内主机。</p>
+<h2 id="一键部署"><a href="#一键部署" class="headerlink" title="一键部署"></a>一键部署</h2><p><em><strong>Python和Docker二选一安装</strong></em></p>
+<h3 id="安装Python运行（二选一，必选）"><a href="#安装Python运行（二选一，必选）" class="headerlink" title="安装Python运行（二选一，必选）"></a>安装Python运行（二选一，必选）</h3><p><em>Python版本推荐3.9+</em></p>
+<p>安装Python很简单，不同系统安装方式也不同；避免篇幅冗长请自行百度，相信凭各位能力可以解决；该项是程序的核心支撑服务，一定要安装！</p>
+<p>安装好Python后看下面</p>
+<h4 id="命令终端执行"><a href="#命令终端执行" class="headerlink" title="命令终端执行"></a>命令终端执行</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/239144498/Streaming-Media-Server-Pro.git</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装python环境依赖"><a href="#安装python环境依赖" class="headerlink" title="安装python环境依赖"></a>安装python环境依赖</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="让程序跑起来"><a href="#让程序跑起来" class="headerlink" title="让程序跑起来"></a>让程序跑起来</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br><span class="line">浏览器访问：http://ip:8080/docs</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Docker运行（二选一，必选）"><a href="#安装Docker运行（二选一，必选）" class="headerlink" title="安装Docker运行（二选一，必选）"></a>安装Docker运行（二选一，必选）</h3><p>Docker项目地址：<a class="link"   target="_blank" rel="noopener" href="https://hub.docker.com/r/239144498/streaming" >https://hub.docker.com/r/239144498/streaming<i class="fas fa-external-link-alt"></i></a></p>
+<p>安装Docker很简单，不同系统安装方式也不同；避免篇幅冗长请自行百度，相信凭各位能力可以解决；该项是程序的核心支撑服务，一定要安装！</p>
+<p>安装好Docker后看下面</p>
+<h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull 239144498/streaming</span><br></pre></td></tr></table></figure>
+
+<h4 id="让程序跑起来-1"><a href="#让程序跑起来-1" class="headerlink" title="让程序跑起来"></a>让程序跑起来</h4><p><em>以下二选一执行</em></p>
+<h5 id="1、直接运行（新手推荐）"><a href="#1、直接运行（新手推荐）" class="headerlink" title="1、直接运行（新手推荐）"></a>1、直接运行（新手推荐）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd -p 8080:8080 --restart=always --name server 239144498/streaming  </span><br><span class="line">浏览器访问：http://ip:8080/docs</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、挂载目录运行（主机目录共享给容器）"><a href="#2、挂载目录运行（主机目录共享给容器）" class="headerlink" title="2、挂载目录运行（主机目录共享给容器）"></a>2、挂载目录运行（主机目录共享给容器）</h5><h6 id="创建存放配置文件的文件夹"><a href="#创建存放配置文件的文件夹" class="headerlink" title="创建存放配置文件的文件夹"></a>创建存放配置文件的文件夹</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/assets</span><br></pre></td></tr></table></figure>
+
+<h6 id="创建并编辑config-ini文件"><a href="#创建并编辑config-ini文件" class="headerlink" title="创建并编辑config.ini文件"></a>创建并编辑config.ini文件</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /home/assets/config.ini	</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>按i再输入你的<a href="http://naihe.me/posts/cb914493/">配置文件</a>内容，完成后ESC 输入”:wq!“回车</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd -v /home/assets:/code/app/assets -p 8080:8080 --restart=always --name server 239144498/streaming  </span><br><span class="line">浏览器访问：http://ip:8080/docs</span><br></pre></td></tr></table></figure>
+
+<h2 id="程序额外功能"><a href="#程序额外功能" class="headerlink" title="程序额外功能"></a>程序额外功能</h2><h3 id="自定义IPTV源"><a href="#自定义IPTV源" class="headerlink" title="自定义IPTV源"></a>自定义IPTV源</h3><p>该程序支持自定义源，如果你有其他iptv源，可以添加到该程序中，在app&#x2F;assets&#x2F;diychannel.txt文件中添加你的频道，如下图：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="http://typora.datastream.tebi.io/image-20220905143823893.png"
+                      alt="image-20220905143823893"
+                ></p>
+<p><em>Ps：使用Docker 需要把文件放到本机的&#x2F;home&#x2F;assets目录</em></p>
+<p>添加后使用&#x2F;program.m3u接口就可以看到自己的IPTV源啦。</p>
+<h3 id="挂载配置文件"><a href="#挂载配置文件" class="headerlink" title="挂载配置文件"></a>挂载配置文件</h3><p>做这个功能是为了解决Docker中config.ini文件重复配置问题，比如Docker镜像重新安装后可以读取挂载目录中已配置好的config.ini文件到容器中，减少不必要操作。</p>
+<p> <em>Ps： 在Docker中自定义IPTV源也是把文件放到本机的&#x2F;home&#x2F;assets目录</em></p>
+<h4 id="创建存放配置文件的文件夹-1"><a href="#创建存放配置文件的文件夹-1" class="headerlink" title="创建存放配置文件的文件夹"></a>创建存放配置文件的文件夹</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/assets</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建并编辑config-ini文件-1"><a href="#创建并编辑config-ini文件-1" class="headerlink" title="创建并编辑config.ini文件"></a>创建并编辑config.ini文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /home/assets/config.ini	</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>按i再输入你的<a href="###%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF">配置文件</a>内容，完成后ESC 输入”:wq!“回车</p>
+</blockquote>
+<h2 id="进阶操作"><a href="#进阶操作" class="headerlink" title="进阶操作"></a>进阶操作</h2><p>*<em>下面操作都是可选的，愿意掌握程序更多功能往下看</em></p>
+<h3 id="Config-ini文件配置（可选）"><a href="#Config-ini文件配置（可选）" class="headerlink" title="Config.ini文件配置（可选）"></a>Config.ini文件配置（可选）</h3><p><em>config.ini配置文件可以保持默认不用修改</em></p>
+<p>&#x3D;&#x3D;Config.ini文件在程序路径.app&#x2F;assets&#x2F;config.ini&#x3D;&#x3D;</p>
+<p>根据实际情况配置参数，例如安装了MySQL，在config.ini更改为你的参数即可，PostgreSql数据库类似填写，不懂就不修改。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[default]</span></span><br><span class="line"><span class="comment"># defaultdb 选择参数：mysql | postgresql | 留空则不连接数据库</span></span><br><span class="line"><span class="attr">defaultdb</span> =</span><br><span class="line"></span><br><span class="line"><span class="section">[mysql]</span></span><br><span class="line"><span class="comment"># 将下列5行改为你的参数</span></span><br><span class="line"><span class="attr">host</span>     = <span class="number">192.168</span>.<span class="number">1</span>.x 	<span class="comment"># ip地址</span></span><br><span class="line"><span class="attr">user</span>     = root	<span class="comment"># 用户名</span></span><br><span class="line"><span class="attr">password</span> = <span class="number">123456789</span>	<span class="comment"># 密码</span></span><br><span class="line"><span class="attr">port</span>     = <span class="number">3306</span>	<span class="comment"># 端口</span></span><br><span class="line"><span class="attr">database</span> = media	<span class="comment"># 数据库名</span></span><br></pre></td></tr></table></figure>
+
+<p>设置外网访问：你的ip+端口 或者 域名 + 端口</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 你的外网映射端口号，默认8080</span></span><br><span class="line"><span class="attr">port</span> = <span class="number">8080</span></span><br><span class="line"><span class="comment"># 修改192.168.1.x为你的ip或域名</span></span><br><span class="line"><span class="attr">localhost</span> = http://<span class="number">192.168</span>.<span class="number">1</span>.x:%(port)s</span><br></pre></td></tr></table></figure>
+
+<p>视频下载选项，部署了分布式下载选online，否则选local，该前提是已安装数据库</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># downchoose参数：local | online</span></span><br><span class="line"><span class="attr">downchoose</span> = local</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;部署分布式代码下载，你需要<a class="link"   target="_blank" rel="noopener" href="https://github.com/239144498/Streaming-Media-Server-Pro/tree/main/app" >点击跳转<i class="fas fa-external-link-alt"></i></a>部署(前提：需要在线托管服务，或者主机)&#x3D;&#x3D;</p>
+<p>免费托管服务推荐：</p>
+<pre><code>pythonanywhere：https://www.pythonanywhere.com
+heroku：https://www.heroku.com
+</code></pre>
+<p>免费redis：<a class="link"   target="_blank" rel="noopener" href="https://console.upstash.com/" >https://console.upstash.com<i class="fas fa-external-link-alt"></i></a></p>
+<p>设置视频缓冲区，安装了数据库看这里</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 视频缓冲区大小，local推荐2-3，online推荐4-5</span></span><br><span class="line"><span class="comment"># 实际根据网络带宽和计算机性能决定</span></span><br><span class="line"><span class="attr">vbuffer</span> = <span class="number">3</span></span><br><span class="line"><span class="comment"># 分布式视频下载器</span></span><br><span class="line"><span class="comment"># local示例[&quot;https://&quot;+localhost+&quot;/url3?url=&quot;, ...]</span></span><br><span class="line"><span class="comment"># online示例[&quot;https://www.example1.com/url3?url=&quot;, ...]</span></span><br><span class="line"><span class="comment"># 有多个分布式下载链接使用方法如下，否则参数不要改</span></span><br><span class="line"><span class="attr">downurls</span> = [<span class="string">&quot;%&#123;localhost&#125;s/url3?url=&quot;</span>,</span><br><span class="line">            <span class="string">&quot;https://www.example1.com/url3?url=&quot;</span>,</span><br><span class="line">            <span class="string">&quot;https://www.example2.com/url3?url=&quot;</span>,...]</span><br></pre></td></tr></table></figure>
+
+<h4 id="更多Config-ini配置（可选）"><a href="#更多Config-ini配置（可选）" class="headerlink" title="更多Config.ini配置（可选）"></a>更多Config.ini配置（可选）</h4><p>程序默认使用我提供的<a class="link"   target="_blank" rel="noopener" href="https://agit.ai/239144498/demo/raw/branch/master/4gtvchannel.xml" >EPG节目单<i class="fas fa-external-link-alt"></i></a>（每日会自动更新），如果你需要创建该脚本，需要在config.ini配置文件提供xmlowner、xmlrepo、xmlaccess_token这三个参数。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 存放节目单仓库</span></span><br><span class="line"><span class="attr">xmlowner</span> = 用户名</span><br><span class="line"><span class="attr">xmlrepo</span> = 仓库名</span><br><span class="line"><span class="attr">xmlaccess_token</span> = token</span><br></pre></td></tr></table></figure>
+
+<p>下面是进阶操作，不懂就不修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[advanced]</span><br><span class="line">host1 = 4gtvfreepc-cds.cdn.hinet.net</span><br><span class="line">host2 = 4gtvfree-cds.cdn.hinet.net</span><br><span class="line"># tvglogo可选参数：fsLOGO_MOBILE 台标 | fsHEAD_FRAME 播放预览</span><br><span class="line">tvglogo = fsHEAD_FRAME</span><br><span class="line"># 对所有接口启用代理，没有就不用配置</span><br><span class="line"># 代理有身份验证： http://user:password@10.10.1.10:3128</span><br><span class="line"># 代理无身份验证： http://10.10.1.10:3128</span><br><span class="line"># 支持协议 http | https | socks5</span><br><span class="line">proxies =</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Mysql（建议安装）"><a href="#安装Mysql（建议安装）" class="headerlink" title="安装Mysql（建议安装）"></a>安装Mysql（建议安装）</h3><p>&#x3D;&#x3D;<strong>要求Mysql版本5.1.6+</strong>&#x3D;&#x3D;</p>
+<p>安装Mysql很简单，不同系统安装方式也不同；避免篇幅冗长请自行百度，相信凭各位能力可以解决；完成后可开启视频缓冲区功能，不安装就跳到第二步</p>
+<p>开启Mysql后看下面</p>
+<h4 id="执行以下sql命令"><a href="#执行以下sql命令" class="headerlink" title="执行以下sql命令"></a>执行以下sql命令</h4><p><em>tips：在config文件中正确填写Mysql信息，程序会自动完成下面命令，前提需要账号有足够权限</em></p>
+<h5 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE media</span><br></pre></td></tr></table></figure>
+
+<h5 id="创建video表"><a href="#创建video表" class="headerlink" title="创建video表"></a>创建video表</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> media.video(</span><br><span class="line">    vname <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    <span class="keyword">CONSTRAINT</span> video_pk <span class="keyword">PRIMARY</span> KEY (vname),</span><br><span class="line">    vcontent  MEDIUMBLOB <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    vsize <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">NULL</span>,</span><br><span class="line">    ctime  <span class="type">timestamp</span>(<span class="number">0</span>) <span class="keyword">default</span> now()</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置定时删除事件"><a href="#设置定时删除事件" class="headerlink" title="设置定时删除事件"></a>设置定时删除事件</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> event_scheduler <span class="operator">=</span> <span class="keyword">ON</span>;	# 开启事件调度器</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use media;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> event IF <span class="keyword">EXISTS</span> auto_delete;</span><br><span class="line"><span class="keyword">CREATE</span> EVENT auto_delete</span><br><span class="line"><span class="keyword">ON</span> SCHEDULE <span class="keyword">EVERY</span> <span class="number">30</span> <span class="keyword">minute</span>     # xx分钟根据数据库的存储和查询性能综合决定</span><br><span class="line">DO</span><br><span class="line"><span class="keyword">TRUNCATE</span> video;</span><br></pre></td></tr></table></figure>
+
+<h4 id="最后在Streaming-Media-Server-Pro-x2F-app-x2F-assets-x2F-config-ini-配置文件中改成你的ip、port等参数"><a href="#最后在Streaming-Media-Server-Pro-x2F-app-x2F-assets-x2F-config-ini-配置文件中改成你的ip、port等参数" class="headerlink" title="最后在Streaming-Media-Server-Pro&#x2F;app&#x2F;assets&#x2F;config.ini  配置文件中改成你的ip、port等参数"></a>最后在<a class="link"   target="_blank" rel="noopener" href="https://github.com/239144498/Streaming-Media-Server-Pro" >Streaming-Media-Server-Pro<i class="fas fa-external-link-alt"></i></a>&#x2F;<a class="link"   target="_blank" rel="noopener" href="https://github.com/239144498/Streaming-Media-Server-Pro/tree/main/app" >app<i class="fas fa-external-link-alt"></i></a>&#x2F;<a class="link"   target="_blank" rel="noopener" href="https://github.com/239144498/Streaming-Media-Server-Pro/tree/main/app/assets" >assets<i class="fas fa-external-link-alt"></i></a>&#x2F;<strong>config.ini</strong>  配置文件中改成你的ip、port等参数</h4><h3 id="安装Redis（可选安装）"><a href="#安装Redis（可选安装）" class="headerlink" title="安装Redis（可选安装）"></a>安装Redis（可选安装）</h3><p>安装Redis很简单，不同系统安装方式也不同；避免篇幅冗长请自行百度，相信凭各位能力可以解决；完成后可缓存参数，解决重启服务数据丢失问题，且方便多服务共享数据。</p>
+<p>我在程序中设置了以内存作为缓存，所以也可以不安装，但缺点就是重启服务数据丢失。</p>
+<p>开启Redis后看下面</p>
+<p>开启了ssl需要在代码中的ssl设置true，默认false</p>
+<h4 id="最后在Streaming-Media-Server-Pro-x2F-app-x2F-assets-x2F-config-ini-配置文件中改成你的ip、port等参数-1"><a href="#最后在Streaming-Media-Server-Pro-x2F-app-x2F-assets-x2F-config-ini-配置文件中改成你的ip、port等参数-1" class="headerlink" title="最后在Streaming-Media-Server-Pro&#x2F;app&#x2F;assets&#x2F;config.ini  配置文件中改成你的ip、port等参数"></a>最后在<a class="link"   target="_blank" rel="noopener" href="https://github.com/239144498/Streaming-Media-Server-Pro" >Streaming-Media-Server-Pro<i class="fas fa-external-link-alt"></i></a>&#x2F;<a class="link"   target="_blank" rel="noopener" href="https://github.com/239144498/Streaming-Media-Server-Pro/tree/main/app" >app<i class="fas fa-external-link-alt"></i></a>&#x2F;<a class="link"   target="_blank" rel="noopener" href="https://github.com/239144498/Streaming-Media-Server-Pro/tree/main/app/assets" >assets<i class="fas fa-external-link-alt"></i></a>&#x2F;<strong>config.ini</strong>  配置文件中改成你的ip、port等参数</h4><h3 id="Docker扩展操作"><a href="#Docker扩展操作" class="headerlink" title="Docker扩展操作"></a>Docker扩展操作</h3><h5 id="查看容器状态"><a href="#查看容器状态" class="headerlink" title="查看容器状态"></a>查看容器状态</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看镜像列表"><a href="#查看镜像列表" class="headerlink" title="查看镜像列表"></a>查看镜像列表</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看容器资源使用情况"><a href="#查看容器资源使用情况" class="headerlink" title="查看容器资源使用情况"></a>查看容器资源使用情况</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stats</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看容器内部的标准输出"><a href="#查看容器内部的标准输出" class="headerlink" title="查看容器内部的标准输出"></a>查看容器内部的标准输出</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs [ID或者名字]</span><br></pre></td></tr></table></figure>
+
+<h5 id="进入容器命令终端"><a href="#进入容器命令终端" class="headerlink" title="进入容器命令终端"></a>进入容器命令终端</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it server /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h5 id="查看端口开放状态"><a href="#查看端口开放状态" class="headerlink" title="查看端口开放状态"></a>查看端口开放状态</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anp | grep 8080</span><br></pre></td></tr></table></figure>
+
+<h5 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart IMAGE_ID</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker rm CONTAINER_ID</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker rmi IMAGE_ID</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="完整Config-ini配置信息"><a href="#完整Config-ini配置信息" class="headerlink" title="完整Config.ini配置信息"></a>完整Config.ini配置信息</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先看教程，不懂就不要乱改参数，后果将导致程序运行出错！</span></span><br><span class="line"><span class="section">[default]</span></span><br><span class="line"><span class="comment"># defaultdb 可选参数：mysql | postgresql | 不连接数据库则留空</span></span><br><span class="line">defaultdb =</span><br><span class="line"><span class="comment"># downchoose 可选参数：local | online</span></span><br><span class="line"><span class="attr">downchoose</span> = local</span><br><span class="line"><span class="comment"># 你的外网映射端口号，默认8080</span></span><br><span class="line"><span class="attr">port</span> = <span class="number">8080</span></span><br><span class="line"><span class="comment"># 修改192.168.1.x为你的ip或域名</span></span><br><span class="line">localhost = </span><br><span class="line"><span class="comment"># vbuffer视频缓冲区大小，downchoose：local推荐2-3，online推荐4-5，实际根据通信带宽和计算机性能决定</span></span><br><span class="line"><span class="attr">vbuffer</span> = <span class="number">3</span></span><br><span class="line"><span class="comment"># 以下3个参数不懂就不要动</span></span><br><span class="line"><span class="attr">downurls</span> = [<span class="string">&quot;%(localhost)s/url3?url=&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进阶操作，默认不用改</span></span><br><span class="line"><span class="section">[advanced]</span></span><br><span class="line"><span class="attr">host1</span> = https://<span class="number">4</span>gtvfreepc-cds.cdn.hinet.net</span><br><span class="line"><span class="attr">host2</span> = https://<span class="number">4</span>gtvfree-cds.cdn.hinet.net</span><br><span class="line"><span class="comment"># tvglogo可选参数：fsLOGO_MOBILE 台标 | fsHEAD_FRAME 播放预览</span></span><br><span class="line"><span class="attr">tvglogo</span> = fsHEAD_FRAME</span><br><span class="line"><span class="comment"># 对所有接口启用代理，没有就不用配置</span></span><br><span class="line"><span class="comment"># 代理有验证： http://user:password@10.10.1.10:3128 | 代理无验证： http://10.10.1.10:3128</span></span><br><span class="line"><span class="attr">proxies</span> =</span><br><span class="line"><span class="attr">debug</span> = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="section">[mysql]</span></span><br><span class="line"><span class="attr">host</span>     = <span class="number">192</span>.x.<span class="number">91.34</span></span><br><span class="line"><span class="attr">user</span>     = root</span><br><span class="line"><span class="attr">password</span> = <span class="number">123456789</span></span><br><span class="line"><span class="attr">port</span>     = <span class="number">3306</span></span><br><span class="line"><span class="attr">database</span> = media</span><br><span class="line"></span><br><span class="line"><span class="section">[postgresql]</span></span><br><span class="line"><span class="attr">host</span>     = <span class="number">192</span>.x.<span class="number">91.34</span></span><br><span class="line"><span class="attr">user</span>     = root</span><br><span class="line"><span class="attr">password</span> = <span class="number">123456789</span></span><br><span class="line"><span class="attr">port</span>     = <span class="number">5432</span></span><br><span class="line"><span class="attr">database</span> = media</span><br><span class="line"></span><br><span class="line"><span class="section">[redis]</span></span><br><span class="line"><span class="attr">host</span>     = <span class="number">192</span>.x.<span class="number">91.34</span></span><br><span class="line"><span class="attr">port</span>     = <span class="number">6379</span></span><br><span class="line"><span class="attr">password</span> = <span class="number">123456789</span></span><br><span class="line"></span><br><span class="line"><span class="section">[other]</span></span><br><span class="line"><span class="comment"># 存放节目单厂库</span></span><br><span class="line"><span class="attr">xmlowner</span> =</span><br><span class="line"><span class="attr">xmlrepo</span> =</span><br><span class="line">xmlaccess_token =</span><br><span class="line"><span class="comment"># 接口限制指定ip，默认使用我提供的接口</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="接口使用教程"><a href="#接口使用教程" class="headerlink" title="接口使用教程"></a>接口使用教程</h1><p><em>可以访问 <a class="link"   target="_blank" rel="noopener" href="https://stream.naihe.cf/docs" >https://stream.naihe.cf/docs<i class="fas fa-external-link-alt"></i></a> 接口文档</em></p>
+<h2 id="GET-x2F-online-m3u8"><a href="#GET-x2F-online-m3u8" class="headerlink" title="GET &#x2F;online.m3u8"></a>GET &#x2F;online.m3u8</h2><h3 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>位置</th>
+<th>类型</th>
+<th align="center">必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>host</td>
+<td>query</td>
+<td>string</td>
+<td align="center">否</td>
+<td>反向代理域名，例<a class="link"   target="_blank" rel="noopener" href="http://www.example.com/" >http://www.example.com<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td>fid</td>
+<td>query</td>
+<td>string</td>
+<td align="center">是</td>
+<td>频道参数，例4gtv-4gtv018</td>
+</tr>
+<tr>
+<td>hd</td>
+<td>query</td>
+<td>string</td>
+<td align="center">否</td>
+<td>视频清晰度，可选360、480、720、1080</td>
+</tr>
+</tbody></table>
+<p>实例请求：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1:8080/online.m3u8?fid=4gtv-4gtv018&amp;hd=720&amp;host=http://www.example.com" >http://127.0.0.1:8080/online.m3u8?fid=4gtv-4gtv018&amp;hd=720&amp;host=http://www.example.com<i class="fas fa-external-link-alt"></i></a></p>
+<p>host参数用于反向代理，解决本地部署且未挂梯子工具问题，怎么部署反代自行百度</p>
+<p>介绍：客户端请求后将多个ts下载到数据库作为缓冲区，下次客户端请求call.ts就从数据库读取。</p>
+<h2 id="GET-x2F-call-ts"><a href="#GET-x2F-call-ts" class="headerlink" title="GET &#x2F;call.ts"></a>GET &#x2F;call.ts</h2><h3 id="请求参数-1"><a href="#请求参数-1" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>位置</th>
+<th>类型</th>
+<th align="center">必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fid</td>
+<td>query</td>
+<td>string</td>
+<td align="center">是</td>
+<td>频道参数，例4gtv-4gtv018</td>
+</tr>
+<tr>
+<td>seq</td>
+<td>query</td>
+<td>string</td>
+<td align="center">是</td>
+<td>60466177，由&#x2F;online.m3u8自动产生</td>
+</tr>
+<tr>
+<td>hd</td>
+<td>query</td>
+<td>string</td>
+<td align="center">是</td>
+<td>视频清晰度，可选360、480、720、1080</td>
+</tr>
+</tbody></table>
+<p>实例请求：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1:8080/call.ts?fid=litv-longturn11&amp;seq=60466177&amp;hd=1080" >http://127.0.0.1:8080/call.ts?fid=litv-longturn11&amp;seq=60466177&amp;hd=1080<i class="fas fa-external-link-alt"></i></a></p>
+<p>介绍：从数据库读取视频返回给客户端。</p>
+<h2 id="GET-x2F-channel-m3u8"><a href="#GET-x2F-channel-m3u8" class="headerlink" title="GET &#x2F;channel.m3u8"></a>GET &#x2F;channel.m3u8</h2><h3 id="请求参数-2"><a href="#请求参数-2" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>位置</th>
+<th>类型</th>
+<th align="center">必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>host</td>
+<td>query</td>
+<td>string</td>
+<td align="center">否</td>
+<td>反向代理域名，例<a class="link"   target="_blank" rel="noopener" href="http://www.example.com/" >http://www.example.com<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td>fid</td>
+<td>query</td>
+<td>string</td>
+<td align="center">是</td>
+<td>频道参数，例4gtv-4gtv018</td>
+</tr>
+<tr>
+<td>hd</td>
+<td>query</td>
+<td>string</td>
+<td align="center">否</td>
+<td>视频清晰度，可选360、480、720、1080</td>
+</tr>
+</tbody></table>
+<p>实例请求：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1:8080/channel.m3u8?fid=4gtv-4gtv018&amp;hd=720&amp;host=http://www.example.com" >http://127.0.0.1:8080/channel.m3u8?fid=4gtv-4gtv018&amp;hd=720&amp;host=http://www.example.com<i class="fas fa-external-link-alt"></i></a></p>
+<p>介绍：客户端请求后生成视频链接参数，下次客户端请求&#x2F;live&#x2F;{file_path}接口默认本机反代，或者使用host参数作为反代，同时起到分流作用，减轻服务器压力。</p>
+<h2 id="GET-x2F-channel2-m3u8"><a href="#GET-x2F-channel2-m3u8" class="headerlink" title="GET &#x2F;channel2.m3u8"></a>GET &#x2F;channel2.m3u8</h2><h3 id="请求参数-3"><a href="#请求参数-3" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>位置</th>
+<th>类型</th>
+<th align="center">必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fid</td>
+<td>query</td>
+<td>string</td>
+<td align="center">是</td>
+<td>频道参数，例4gtv-4gtv018</td>
+</tr>
+<tr>
+<td>hd</td>
+<td>query</td>
+<td>string</td>
+<td align="center">否</td>
+<td>视频清晰度，可选360、480、720、1080</td>
+</tr>
+</tbody></table>
+<p>实例请求：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1:8080/channel2.m3u8?fid=4gtv-4gtv018&amp;hd=720" >http://127.0.0.1:8080/channel2.m3u8?fid=4gtv-4gtv018&amp;hd=720<i class="fas fa-external-link-alt"></i></a></p>
+<p>介绍：重定向视频链接给客户端。</p>
+<h2 id="GET-x2F-program-m3u"><a href="#GET-x2F-program-m3u" class="headerlink" title="GET &#x2F;program.m3u"></a>GET &#x2F;program.m3u</h2><h3 id="请求参数-4"><a href="#请求参数-4" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>位置</th>
+<th>类型</th>
+<th align="center">必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>host</td>
+<td>query</td>
+<td>string</td>
+<td align="center">否</td>
+<td>反向代理域名，例<a class="link"   target="_blank" rel="noopener" href="http://www.example.com/" >http://www.example.com<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td>hd</td>
+<td>query</td>
+<td>string</td>
+<td align="center">否</td>
+<td>视频清晰度，可选360、480、720、1080</td>
+</tr>
+<tr>
+<td>name</td>
+<td>query</td>
+<td>string</td>
+<td align="center">否</td>
+<td>频道参数，例4gtv-4gtv018</td>
+</tr>
+</tbody></table>
+<p>实例请求：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1:8080/program.m3u?&amp;hd=720&amp;host=http://www.example.com" >http://127.0.0.1:8080/program.m3u?&amp;hd=720&amp;host=http://www.example.com<i class="fas fa-external-link-alt"></i></a></p>
+<p>介绍：返回4gtv全部频道表，兼容手机平板电脑全平台，例如用potplayer播放器使用。</p>
+<h2 id="GET-x2F-EPG-xml"><a href="#GET-x2F-EPG-xml" class="headerlink" title="GET &#x2F;EPG.xml"></a>GET &#x2F;EPG.xml</h2><h3 id="请求参数-5"><a href="#请求参数-5" class="headerlink" title="请求参数"></a>请求参数</h3><p>无</p>
+<p>实例请求：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1:8080/EPG.xml" >http://127.0.0.1:8080/EPG.xml<i class="fas fa-external-link-alt"></i></a></p>
+<p>介绍：返回所有频道未来3天将播放哪些节目</p>
+<h2 id="GET-x2F-live-x2F-file-path"><a href="#GET-x2F-live-x2F-file-path" class="headerlink" title="GET &#x2F;live&#x2F;{file_path}"></a>GET &#x2F;live&#x2F;{file_path}</h2><h3 id="请求参数-6"><a href="#请求参数-6" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>位置</th>
+<th>类型</th>
+<th align="center">必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file_path</td>
+<td>path</td>
+<td>string</td>
+<td align="center">是</td>
+<td>视频url路径</td>
+</tr>
+<tr>
+<td>token1</td>
+<td>query</td>
+<td>string</td>
+<td align="center">否</td>
+<td>token，例FzwRIP1td0zsoDAfEz9</td>
+</tr>
+<tr>
+<td>expires1</td>
+<td>query</td>
+<td>integer</td>
+<td align="center">否</td>
+<td>expires，例1661951225</td>
+</tr>
+</tbody></table>
+<p>实例请求：<a class="link"   target="_blank" rel="noopener" href="http://127.0.0.1:8080/live/pool/4gtv-live012/4gtv-live-mid/7201661716300.ts?token1=FzwRIP1td0zsoDAfEz9-bg&amp;expires1=1661951225" >http://127.0.0.1:8080/live/pool/4gtv-live012/4gtv-live-mid/7201661716300.ts?token1=FzwRIP1td0zsoDAfEz9-bg&amp;expires1=1661951225<i class="fas fa-external-link-alt"></i></a></p>
+<p>介绍：代理下载视频返回给客户端</p>
+<h3 dir="auto">❤ 打赏 Donation</h3>
+<p dir="auto">&emsp;&emsp;如果你觉得本项目对你有帮助，请考虑打赏本项目，以激励我投入更多的时间进行维护与开发。 If you find this project helpful, please consider supporting the project going forward. Your support is greatly appreciated.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://ik.imagekit.io/naihe/pay/hbm.jpg"
+                      width="65%" height="65%" 
+                ></p>
+<p><strong>&emsp;&emsp;你在GitHub给的<code>star</code>或者<code>赞助</code>是我长期维护此项目的动力所在，由衷感谢每一位支持者，&ldquo;每一次你花的钱都是在为你想要的世界投票&rdquo;。 另外，将本项目推荐给更多的人，也是一种支持的方式，用的人越多更新的动力越足。</strong></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：开源IPTV源服务程序使用教程</li>
+        <li>本文作者：naihe,239144498@qq.com</li>
+        <li>创建时间：2022-09-10 21:46:25</li>
+        <li>
+            本文链接：http://naihe.me/posts/cb914493/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/iptv/">#iptv</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/python/">#python</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/fastapi/">#fastapi</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/posts/4a17b156/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Hello World</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;评论</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'HV3lJuIZgmMTtu4N6R205qms-gzGzoHsz',
+                    appKey: 'NwaKfCjAhR6IRpMf50QV05r4',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'zh-CN'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'naihe,239144498@qq.com';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">naihe,239144498@qq.com</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Streaming-Media-Server-Pro"><span class="nav-number">1.</span> <span class="nav-text">Streaming-Media-Server-Pro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E7%A8%8B%E5%BA%8F%E4%BB%8B%E7%BB%8D%E7%82%B9%E5%87%BB%E8%B7%B3%E8%BD%AC"><span class="nav-number">2.0.1.</span> <span class="nav-text">开源程序介绍点击跳转</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B-by-Naihe"><span class="nav-number">3.</span> <span class="nav-text">部署教程 by Naihe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2"><span class="nav-number">3.1.</span> <span class="nav-text">一键部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Python%E8%BF%90%E8%A1%8C%EF%BC%88%E4%BA%8C%E9%80%89%E4%B8%80%EF%BC%8C%E5%BF%85%E9%80%89%EF%BC%89"><span class="nav-number">3.1.1.</span> <span class="nav-text">安装Python运行（二选一，必选）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E7%BB%88%E7%AB%AF%E6%89%A7%E8%A1%8C"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">命令终端执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83%E4%BE%9D%E8%B5%96"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">安装python环境依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A9%E7%A8%8B%E5%BA%8F%E8%B7%91%E8%B5%B7%E6%9D%A5"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">让程序跑起来</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker%E8%BF%90%E8%A1%8C%EF%BC%88%E4%BA%8C%E9%80%89%E4%B8%80%EF%BC%8C%E5%BF%85%E9%80%89%EF%BC%89"><span class="nav-number">3.1.2.</span> <span class="nav-text">安装Docker运行（二选一，必选）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">拉取镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A9%E7%A8%8B%E5%BA%8F%E8%B7%91%E8%B5%B7%E6%9D%A5-1"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">让程序跑起来</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1%E3%80%81%E7%9B%B4%E6%8E%A5%E8%BF%90%E8%A1%8C%EF%BC%88%E6%96%B0%E6%89%8B%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">3.1.2.2.1.</span> <span class="nav-text">1、直接运行（新手推荐）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2%E3%80%81%E6%8C%82%E8%BD%BD%E7%9B%AE%E5%BD%95%E8%BF%90%E8%A1%8C%EF%BC%88%E4%B8%BB%E6%9C%BA%E7%9B%AE%E5%BD%95%E5%85%B1%E4%BA%AB%E7%BB%99%E5%AE%B9%E5%99%A8%EF%BC%89"><span class="nav-number">3.1.2.2.2.</span> <span class="nav-text">2、挂载目录运行（主机目录共享给容器）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%98%E6%94%BE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">3.1.2.2.2.1.</span> <span class="nav-text">创建存放配置文件的文件夹</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E7%BC%96%E8%BE%91config-ini%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.2.2.2.2.</span> <span class="nav-text">创建并编辑config.ini文件</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E9%A2%9D%E5%A4%96%E5%8A%9F%E8%83%BD"><span class="nav-number">3.2.</span> <span class="nav-text">程序额外功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89IPTV%E6%BA%90"><span class="nav-number">3.2.1.</span> <span class="nav-text">自定义IPTV源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.2.</span> <span class="nav-text">挂载配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%98%E6%94%BE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9-1"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">创建存放配置文件的文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E7%BC%96%E8%BE%91config-ini%E6%96%87%E4%BB%B6-1"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">创建并编辑config.ini文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">3.3.</span> <span class="nav-text">进阶操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-ini%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">3.3.1.</span> <span class="nav-text">Config.ini文件配置（可选）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9AConfig-ini%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">更多Config.ini配置（可选）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Mysql%EF%BC%88%E5%BB%BA%E8%AE%AE%E5%AE%89%E8%A3%85%EF%BC%89"><span class="nav-number">3.3.2.</span> <span class="nav-text">安装Mysql（建议安装）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E4%BB%A5%E4%B8%8Bsql%E5%91%BD%E4%BB%A4"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">执行以下sql命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.3.2.1.1.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAvideo%E8%A1%A8"><span class="nav-number">3.3.2.1.2.</span> <span class="nav-text">创建video表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E5%88%A0%E9%99%A4%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.3.2.1.3.</span> <span class="nav-text">设置定时删除事件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E5%9C%A8Streaming-Media-Server-Pro-x2F-app-x2F-assets-x2F-config-ini-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E6%94%B9%E6%88%90%E4%BD%A0%E7%9A%84ip%E3%80%81port%E7%AD%89%E5%8F%82%E6%95%B0"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">最后在Streaming-Media-Server-Pro&#x2F;app&#x2F;assets&#x2F;config.ini  配置文件中改成你的ip、port等参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Redis%EF%BC%88%E5%8F%AF%E9%80%89%E5%AE%89%E8%A3%85%EF%BC%89"><span class="nav-number">3.3.3.</span> <span class="nav-text">安装Redis（可选安装）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E5%9C%A8Streaming-Media-Server-Pro-x2F-app-x2F-assets-x2F-config-ini-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E6%94%B9%E6%88%90%E4%BD%A0%E7%9A%84ip%E3%80%81port%E7%AD%89%E5%8F%82%E6%95%B0-1"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">最后在Streaming-Media-Server-Pro&#x2F;app&#x2F;assets&#x2F;config.ini  配置文件中改成你的ip、port等参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E6%89%A9%E5%B1%95%E6%93%8D%E4%BD%9C"><span class="nav-number">3.3.4.</span> <span class="nav-text">Docker扩展操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%8A%B6%E6%80%81"><span class="nav-number">3.3.4.0.1.</span> <span class="nav-text">查看容器状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%95%9C%E5%83%8F%E5%88%97%E8%A1%A8"><span class="nav-number">3.3.4.0.2.</span> <span class="nav-text">查看镜像列表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5"><span class="nav-number">3.3.4.0.3.</span> <span class="nav-text">查看容器资源使用情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E5%86%85%E9%83%A8%E7%9A%84%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA"><span class="nav-number">3.3.4.0.4.</span> <span class="nav-text">查看容器内部的标准输出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4%E7%BB%88%E7%AB%AF"><span class="nav-number">3.3.4.0.5.</span> <span class="nav-text">进入容器命令终端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%BC%80%E6%94%BE%E7%8A%B6%E6%80%81"><span class="nav-number">3.3.4.0.6.</span> <span class="nav-text">查看端口开放状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8"><span class="nav-number">3.3.4.0.7.</span> <span class="nav-text">重启容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8"><span class="nav-number">3.3.4.0.8.</span> <span class="nav-text">删除容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F"><span class="nav-number">3.3.4.0.9.</span> <span class="nav-text">删除镜像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4Config-ini%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">3.3.5.</span> <span class="nav-text">完整Config.ini配置信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">接口使用教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-x2F-online-m3u8"><span class="nav-number">4.1.</span> <span class="nav-text">GET &#x2F;online.m3u8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">请求参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-x2F-call-ts"><span class="nav-number">4.2.</span> <span class="nav-text">GET &#x2F;call.ts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">请求参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-x2F-channel-m3u8"><span class="nav-number">4.3.</span> <span class="nav-text">GET &#x2F;channel.m3u8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-2"><span class="nav-number">4.3.1.</span> <span class="nav-text">请求参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-x2F-channel2-m3u8"><span class="nav-number">4.4.</span> <span class="nav-text">GET &#x2F;channel2.m3u8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-3"><span class="nav-number">4.4.1.</span> <span class="nav-text">请求参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-x2F-program-m3u"><span class="nav-number">4.5.</span> <span class="nav-text">GET &#x2F;program.m3u</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-4"><span class="nav-number">4.5.1.</span> <span class="nav-text">请求参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-x2F-EPG-xml"><span class="nav-number">4.6.</span> <span class="nav-text">GET &#x2F;EPG.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-5"><span class="nav-number">4.6.1.</span> <span class="nav-text">请求参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-x2F-live-x2F-file-path"><span class="nav-number">4.7.</span> <span class="nav-text">GET &#x2F;live&#x2F;{file_path}</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-6"><span class="nav-number">4.7.1.</span> <span class="nav-text">请求参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.7.2.</span> <span class="nav-text">❤ 打赏 Donation</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
